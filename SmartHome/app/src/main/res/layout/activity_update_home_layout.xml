@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/update_room_background"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="10dp"
+    tools:context=".UpdateHomeActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo_home"
+        android:tint="@color/colorAccent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:text="@string/add_device"
+        android:textColor="@color/colorPrimary"
+        android:textSize="26dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/img_Add_Device"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/border_background_image"
+        android:src="@drawable/image_update"
+        android:tint="@color/color_device" />
+
+    <EditText
+        android:id="@+id/edt_input_ID"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_Id_Device" />
+
+    <EditText
+        android:id="@+id/edt_input_ID_Device"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_ma_Device" />
+
+    <EditText
+        android:id="@+id/edt_input_Name_Device"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_name_Device" />
+
+    <EditText
+        android:id="@+id/edt_input_Content_Device"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_content_Device" />
+
+    <EditText
+        android:id="@+id/edt_input_Type_Device"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/rounded_border_edittext"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_type_Device" />
+
+    <Button
+        android:id="@+id/btn_Submit_Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/button_radius"
+        android:text="@string/button_submit" />
+</LinearLayout>

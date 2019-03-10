@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smart Home</string>
+    <string name="user_name">Tài Khoản</string>
+    <string name="pass_word">Mật Khẩu</string>
+    <string name="forgot_password">Quên Mật Khẩu?</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="intro">Phần Mềm sử dụng cho các sản phẩm điều khiển từ xa của VST sản xuất \n \n Truy cập : www.vste.vn để biết thêm chi tiết</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remember">Nhớ Mật Khẩu</string>
+
+    <!-- Device -->
+    <string name="quat_pk">Quạt PK</string>
+    <string name="quat_bep">Quạt Bếp</string>
+    <string name="quat_tang2">Quạt Tầng 2</string>
+    <string name="den_pk1">Đèn PK1</string>
+    <string name="den_pk2">Đèn PK2</string>
+    <string name="den_pk3">Đèn PK3</string>
+    <string name="den_pk4">Đèn PK4</string>
+    <string name="den_pk5">Đèn PK5</string>
+    <string name="loa">Loa</string>
+    <string name="binh_nong_lanh">Bình Nóng Lạnh</string>
+    <string name="dieu_hoa">Điều Hòa</string>
+    <string name="may_say">Máy Sấy</string>
+    <string name="may_giat">Máy Giặt</string>
+
+    <!-- Stage -->
+    <string name="ve_nha">Về Nhà</string>
+    <string name="di_lam">Đi Làm</string>
+    <string name="nau_an">Nấu Ăn</string>
+    <string name="di_ngu">Đi Ngủ</string>
+    <string name="thuc_day">Thức Dậy</string>
+    <string name="di_tam">Đi Tắm</string>
+    <string name="them_hoat_canh">Thêm Hoạt Cảnh</string>
+
+    <!-- Language -->
+    <string name="language_choose">Chọn ngôn Ngữ</string>
+    <string name="language_string">Ngôn Ngữ : </string>
+    <string name="language_english">Tiếng Anh</string>
+    <string name="language_vietnam">Tiếng Việt</string>
+</resources>

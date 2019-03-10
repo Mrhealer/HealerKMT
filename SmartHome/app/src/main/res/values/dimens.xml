@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="base_margin">10dp</dimen>
+
+    <dimen name="base_text_margin_top">20dp</dimen>
+    <dimen name="base_img_padding">10dp</dimen>
+    <dimen name="base_edt_padding">15dp</dimen>
+    <dimen name="base_button_margin_left">10dp</dimen>
+    <dimen name="base_button_margin_top">10dp</dimen>
+    <dimen name="base_button_margin">10dp</dimen>
+    <dimen name="base_button_padding">15dp</dimen>
+    <dimen name="base_margin_top">20dp</dimen>
+    <dimen name="base_img_width">50dp</dimen>
+    <dimen name="base_img_height">50dp</dimen>
+    <dimen name="text_account_size">16dp</dimen>
+    <dimen name="text_sig_up_size">20dp</dimen>
+
+    <dimen name="fast_scroll_overlay_text_size">100dp</dimen>
+</resources>

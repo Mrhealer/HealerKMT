@@ -1,0 +1,115 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Smart Home</string>
+    <string name="user_name">Tài Khoản</string>
+    <string name="pass_word">Mật Khẩu</string>
+    <string name="forgot_password">Quên Mật Khẩu?</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="intro">Phần Mềm sử dụng cho các sản phẩm điều khiển từ xa của VST sản xuất \n \n Truy cập : www.vste.vn để biết thêm chi tiết</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remember">Nhớ Mật Khẩu</string>
+
+    <!-- Device -->
+    <string name="quat_pk">Quạt PK</string>
+    <string name="quat_bep">Quạt Bếp</string>
+    <string name="quat_tang2">Quạt Tầng 2</string>
+    <string name="den_pk1">Đèn PK1</string>
+    <string name="den_pk2">Đèn PK2</string>
+    <string name="den_pk3">Đèn PK3</string>
+    <string name="den_pk4">Đèn PK4</string>
+    <string name="den_pk5">Đèn PK5</string>
+    <string name="loa">Loa</string>
+    <string name="binh_nong_lanh">Bình Nóng Lạnh</string>
+    <string name="dieu_hoa">Điều Hòa</string>
+    <string name="may_say">Máy Sấy</string>
+    <string name="may_giat">Máy Giặt</string>
+
+    <!-- Stage -->
+    <string name="ve_nha">Về Nhà</string>
+    <string name="di_lam">Đi Làm</string>
+    <string name="nau_an">Nấu Ăn</string>
+    <string name="di_ngu">Đi Ngủ</string>
+    <string name="thuc_day">Thức Dậy</string>
+    <string name="di_tam">Đi Tắm</string>
+    <string name="them_hoat_canh">Thêm Hoạt Cảnh</string>
+
+    <!-- Language -->
+    <string name="language_choose">Chọn ngôn Ngữ</string>
+    <string name="language_string">Ngôn Ngữ : </string>
+    <string name="language_english">Tiếng Anh</string>
+    <string name="language_vietnam">Tiếng Việt</string>
+
+    <!-- finger print -->
+    <string name="finger_print_register" tools:ignore="MissingTranslation">Vân tay chưa được đăng ký, Làm ơn đăng ký vân tay trước khi sử dụng chức năng này</string>
+    <string name="finger_print_login_fail" tools:ignore="MissingTranslation">Vân tay đang không dúng, Xin Hãy thử lại</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="add_device_left">Add device</string>
+    <string name="copy_left">Copy</string>
+    <string name="share_left">Share</string>
+    <string name="webchat_control_left">Webchat Control</string>
+    <string name="settings_left">Setting</string>
+    <string name="feedback_left">Feedback</string>
+    <string name="help_left">Help</string>
+    <string name="demo_left">Demo</string>
+
+    <string name="default_gallery_storage">My Videos</string>
+    <string name="title_auto_upload">Auto upload</string>
+    <string name="summary_upload_over_wifi">Upload the videos when wifi is available</string>
+    <string name="title_upload_quality">Upload Quality</string>
+    <string name="summary_upload_video_quality">Specify video quality for uploads</string>
+    <string name="pref_title_notifications">Notifications</string>
+    <string name="summary_choose_ringtone">Choose notification sound</string>
+    <string name="pref_header_about">About</string>
+    <string name="summary_about">We are a team of like-minded people, specialized in development of Android App Development creating new trends across the app space. Glad to Help in anyway!</string>
+    <string name="app_version">3.5</string>
+    <string name="summary_support">Got any queries? We are happy to help!</string>
+    <string name="title_send_feedback">Send Feedback</string>
+    <string name="title_faq">FAQ</string>
+    <string name="summary_faq">View frequently asked questions</string>
+    <string name="url_faq">http://www.androidhive.info/privacy-policy/</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="url_privacy">http://www.androidhive.info/privacy-policy/</string>
+    <string name="title_terms">Terms &amp; Conditions</string>
+    <string name="url_terms">http://www.androidhive.info/terms-of-service/</string>
+    <string name="title_version">Version</string>
+    <string name="choose_email_client">Choose email client</string>
+    <string name="title_gallery_storage">Default Storage</string>
+    <string name="title_new_notification_sound">New message notification</string>
+    <string name="title_vibrate">Vibrate</string>
+    <string name="summary_vibrate">Vibrate on new notification</string>
+    <string name="key_upload_over_wifi">key_upload_over_wifi</string>
+    <string name="key_gallery_name">key_gallery_name</string>
+    <string name="key_upload_quality">key_upload_quality</string>
+    <string name="notifications_new_message">notifications_new_message</string>
+    <string name="key_notifications_new_message_ringtone">key_notifications_new_message_ringtone</string>
+    <string name="key_vibrate">key_vibrate</string>
+    <string name="key_send_feedback">key_send_feedback</string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Add Device-->
+    <string name="add_device">Add Device</string>
+    <string name="input_Id_Device">Nhập ID</string>
+    <string name="input_ma_Device">Nhập Mã Device</string>
+    <string name="input_name_Device">Nhập Tên Device</string>
+    <string name="input_content_Device">Nhập Nội Dung Device</string>
+    <string name="input_type_Device">Phân Loại Device</string>
+    <string name="button_submit">Submit</string>
+
+</resources>
