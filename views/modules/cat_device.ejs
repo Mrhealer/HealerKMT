@@ -1,0 +1,102 @@
+<section class="content-header">
+    <div class="col-lg-12">
+        <ul class="list-group">
+            <li class="list-group-item list-group-title" id="lblPath_ChucNang">
+                <a onclick="" class="list-group-a"><span class="fa fa-home"></span> Bảng điều khiển</a>
+                <span class="sub-path opacity-5"> / Danh mục - phân loại thiết bị</span>
+                <a style="float:right; cursor: pointer" data-toggle="popover" data-placement="left" title="Help" data-content="intro.user"><i class="fa fa-question-circle fa-customer"></i></a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row ">
+        <div class="col-sm-12">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-hdd-o"></i> Danh mục - phân loại thiết bị 
+                        <span class="badge bg-light-blue">
+                                <span id="lblTotal_CatDevice">0</span>
+                            </span>
+                    </h3>
+                    <div class="pull-right">
+                        <a class="btn btn-primary poiter" id="btnCallModal"><i class="fa fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="col-sm-12">
+                        <table id="tblCatDevice" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="td-center">Stt</th>
+                                    <th class="td-left">Mã</th>
+                                    <th class="td-left">Tên</th>
+                                    <th class="td-left">Nội dung</th>
+                                    <th class="td-center">Sửa</th>
+                                    <th class="td-center">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="myModal_CatDevice" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel"><span class="lang" key="">--</span></h4>
+            </div>
+            <div class="modal-body" style="">
+                <!--row 1-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Mã</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtCatDevice_Code" class="form-control" />
+                    </div>
+                </div>
+                <!--row 2-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Tên</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtCatDevice_Name" class="form-control" />
+                    </div>
+                </div>
+                <!--row 3-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Nội dung</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtCatDevice_Discript" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div id="notify"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i><span class="lang" key=""> Đóng</span></button>
+                <a class="submit btn btn-primary" id="btnSave_CatDevice"><i class="fa fa-save"></i><span class="lang" key=""> Lưu</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page script -->
+<script src="./js/process/cat_device.js?v=1.0.0.0"></script>
+<script type="text/javascript">
+    var main_doc = {};
+    main_doc['CatDevice'] = new CatDevice();
+    $(document).ready(function () {
+        main_doc.CatDevice.init();
+    });
+</script>

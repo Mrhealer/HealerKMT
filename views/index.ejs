@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include partials/head %>
+    </head>
+    <!--sidebar-mini-expand-feature sidebar-collapse colage when pageload-->
+    <!--hold-transition skin-blue fixed sidebar-mini sidebar-mini-expand-feature sidebar-collapse-->
+    <body class="skin-blue">
+        <div class="wrapper">
+            <div id="alert"></div>
+            <div id="loading"></div>
+            <div class="overlay" id="overlay" style="position:fixed; margin-top:150px; z-index:1051; margin-left:50%; display:none">
+                <i style="color:#00a65a; font-size:25px" class="fa fa-spinner fa-spin"></i>
+            </div>
+            <!-- Header-horizontal -->
+            <% include partials/menu_hor %>
+            <!--Menu_left_vertical-->
+            <% include partials/menu_ver %>
+            <!-- Content Wrapper. Contains page content -->
+            <form id="formCMS" runat="server">
+                <div id="main-content-wrapper" class="content-wrapper">
+                    <!--LOAD HTML HERE-->
+                </div>
+            </form>
+            
+            <!-- change password modal-->
+            <% include partials/pass_change %>
+            <!-- Footer -->
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs"><b>Version</b> 1.0.0</div>
+                <strong>Copyright &copy; 2017-2019 <a href="#">Thuongkmt</a></strong>.
+            </footer>
+            <!--Config_System_right-->
+            <% include partials/config_sys %>
+            <!-- Add the sidebar's background. This div must be placedimmediately after the control sidebar -->
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!--foot-->
+        <% include partials/foot %>
+    </body>
+</html>
+<script src="plugins/socket.io/socket.io.js"></script>
+<script>
+    $(document).ready( function() {
+        //initial function
+        $("#main-content-wrapper").load("user");
+
+        //switch function
+        $("#user").on("click", function() {
+            $("#main-content-wrapper").load("user");
+        });
+        $("#device").on("click", function() {
+            $("#main-content-wrapper").load("device");
+        });
+        $("#cat_device").on("click", function() {
+            $("#main-content-wrapper").load("cat_device");
+        });
+        $("#check_connect").on("click", function() {
+            $("#main-content-wrapper").load("check_connect");
+        });
+    });
+</script>

@@ -1,0 +1,25 @@
+﻿/*Search-zone*/
+.area-search>.col-sm-3{
+    padding-bottom:5px;
+}
+.titleSearch{
+    font-weight:bold;
+}
+.titleSearchContent{
+    font-weight:bold; 
+    cursor:pointer;
+    margin: 0;
+}
+.inputSearch{
+    width:100%; 
+}
+.item-search{
+    padding-left:0px !important;
+}
+.row{
+    background:white !important
+}
+.col-sm-3
+{
+    margin-bottom:3px;
+}

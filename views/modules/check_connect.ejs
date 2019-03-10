@@ -1,0 +1,67 @@
+<section class="content-header">
+        <div class="col-lg-12">
+            <ul class="list-group">
+                <li class="list-group-item list-group-title" id="lblPath_ChucNang">
+                    <a onclick="" class="list-group-a"><span class="fa fa-home"></span> Bảng điều khiển</a>
+                    <span class="sub-path opacity-5"> / Kiểm tra kết nối</span>
+                    <a style="float:right; cursor: pointer" data-toggle="popover" data-placement="left" title="Help" data-content="intro.user"><i class="fa fa-question-circle fa-customer"></i></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row ">
+            <div class="col-sm-6">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-send"></i> Vui lòng nhập thông tin gửi lên server</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <textarea id="txtSend" class="form-control"></textarea>
+                            <a id="btnSend" class="btn btn-primary" href="#"> Gửi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-server"></i> Nội dung server trả về</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <textarea id="txtReceive" class="form-control" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page script -->
+    <script src="./js/process/user/check_connect.js?v=1.0.0.0"></script>
+    <script type="text/javascript">
+        //listen socket
+        var socket = io.connect('http://localhost:8081');
+        socket.on('*', function (data) {
+            console.log(data);
+            var txtContent = data.content;
+            $("#txtReceive").val(txtContent)
+        });
+
+        $("#btnSend").click(function(){
+            var txtContent = $("#txtSend").val();
+            console.log("txtContent: " + txtContent);
+            socket.emit('*', { content: txtContent });
+        });
+
+        // connect to file processing
+        var main_doc = {};
+        main_doc['Check'] = new Check();
+        $(document).ready(function () {
+            main_doc.Check.init();
+        });
+    </script>

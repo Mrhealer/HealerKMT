@@ -1,0 +1,73 @@
+<!--SCRIPTS-->
+<script type="text/javascript" src="./plugins/jquery/jquery.min.js"></script><!-- jQuery 3 -->
+<script type="text/javascript" src="./plugins/jquery-iu/jquery-ui.min.js"></script><!-- jQuery-iu 2.1.4 -->
+<script> $.widget.bridge('uibutton', $.ui.button);</script><!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script type="text/javascript" src="./plugins/bootstrap/js/bootstrap.min.js"></script><!-- Bootstrap 3.3.7 -->
+<script type="text/javascript" src="./plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script><!--SlimScroll -->
+<script type="text/javascript" src="./plugins/fastclick/lib/fastclick.js"></script><!-- FastClick -->
+<script type="text/javascript" src="./plugins/adminlte/js/adminlte.min.js"></script><!--Template AdminLTE App -->
+<script type="text/javascript" src="./plugins/select2/js/select2.min.js"></script><!--select_option-->
+<script type="text/javascript" src="./plugins/chartjs/Chart.min.js"></script><!--ChartJS-->
+<script type="text/javascript" src="./plugins/pagination/jquery.simplePagination.js"></script><!--Plugin pagination-->
+<script type="text/javascript" src="./plugins/jstree/dist/jstree.min.js"></script><!--Plugin jstree-->
+<script type="text/javascript" src="./plugins/datepicker/bootstrap-datepicker.js"></script><!--Plugin bootstrap-->
+<script type="text/javascript" src="./plugins/cleave.js/dist/cleave.min.js"></script><!--Plugin cleave-->
+<script type="text/javascript" src="./js/core/constant.js?v=1.0.0.0"></script>    <!--CORE JS-->
+<script type="text/javascript" src="./js/core/systemroot.js?v=1.0.0.1"></script>  <!--CORE JS-->
+<script type="text/javascript" src="./js/core/util.js?v=1.0.0.0"></script>        <!--CORE JS-->
+<script type="text/javascript" src="./js/core/systemextend.js?v=1.0.0.0"></script><!--CORE JS-->
+<script type="text/javascript">
+    function Init_Prammater() {
+        var rootPath        = '';
+        var rootPathAPI     = 'http://localhost:8881/api';
+        var rootPathUpload  = '';
+        var rootPathDepend  = '';
+        var rootPathCDN     = '';
+        var rootPathReport  = '';
+        var rootPathHelp    = '';
+
+        var shareWebName    = '';
+        var folderAvatar    = '';
+        var folderDoc       = '';
+        var folderNew       = '';
+        var folderTemp      = '';
+        
+        var appId           = '';
+        var userId          = '';
+        var langId          = '';
+        var tokenJWT        = '';
+
+        var oConfig = {
+            rootPath: rootPath,
+            rootPathAPI: rootPathAPI,
+            rootPathUpload: rootPathUpload,
+            rootPathDepend: rootPathDepend,
+            rootPathCDN: rootPathCDN,
+            rootPathReport: rootPathReport,
+            rootPathHelp: rootPathHelp,
+
+            shareWebName: shareWebName,
+            folderAvatar: folderAvatar,
+            folderDoc: folderDoc,
+            folderNew: folderNew,
+            folderTemp: folderTemp,
+
+            appId: appId,
+            userId: userId,
+            langId: langId,
+            tokenJWT:tokenJWT
+        };
+        
+        return oConfig;
+    }
+    var core = {};
+    core['system']   = new systemroot();
+    core['extend']   = new systemextend();
+    core['constant'] = new constant();
+    core['util']     = new util();
+    $(document).ready(function () {
+        core.system.startApp();
+        core.extend.init_sys_extend();
+        core.constant.init();
+    });
+</script>
