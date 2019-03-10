@@ -2,12 +2,27 @@ package com.kaity.dev.smarthome.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.kaity.dev.smarthome.CheckWifiActivity;
+import com.kaity.dev.smarthome.DashBoard.HomeActivity;
 import com.kaity.dev.smarthome.Database.DatabaseHelper;
+import com.kaity.dev.smarthome.VolleyLib.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
 
