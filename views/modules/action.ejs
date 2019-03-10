@@ -3,7 +3,7 @@
         <ul class="list-group">
             <li class="list-group-item list-group-title" id="lblPath_ChucNang">
                 <a onclick="" class="list-group-a"><span class="fa fa-home"></span> Bảng điều khiển</a>
-                <span class="sub-path opacity-5"> / Danh sách thiết bị</span>
+                <span class="sub-path opacity-5"> / Định nghĩa hoạt cảnh</span>
                 <a style="float:right; cursor: pointer" data-toggle="popover" data-placement="left" title="Help" data-content="intro.user"><i class="fa fa-question-circle fa-customer"></i></a>
             </li>
         </ul>
@@ -16,10 +16,10 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        <i class="fa fa-hdd-o"></i> Danh sách thiết bị 
+                        <i class="fa fa-hdd-o"></i> Danh sách hoạt cảnh
                         <span class="badge bg-light-blue">
-                            <span id="lblTotal_Device">0</span>
-                        </span>
+                                <span id="lblTotal_Action">0</span>
+                            </span>
                     </h3>
                     <div class="pull-right">
                         <a class="btn btn-primary poiter" id="btnCallModal"><i class="fa fa-plus"></i> Thêm</a>
@@ -27,14 +27,13 @@
                 </div>
                 <div class="box-body">
                     <div class="col-sm-12">
-                        <table id="tblDevice" class="table table-bordered table-hover">
+                        <table id="tblAction" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="td-center">Stt</th>
+                                    <th class="td-fixed td-center">Stt</th>
                                     <th class="td-center">Hình ảnh</th>
-                                    <th class="td-left">Tên thiết bị</th>
-                                    <th class="td-left">Mã thiết bị</th>
-                                    <th class="td-left">Phân loại</th>
+                                    <th class="td-left">Mã</th>
+                                    <th class="td-left">Tên</th>
                                     <th class="td-left">Người dùng</th>
                                     <th class="td-left">Nội dung</th>
                                     <th class="td-fixed td-center">Sửa</th>
@@ -50,85 +49,75 @@
         </div>
     </div>
 </section>
-<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal_Action" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="myModalLabel"><span class="lang" key="">--</span></h4>
             </div>
-            <div class="modal-body" style="">
+            <div class="modal-body">
+                
                 <!--row 1-->
                 <div class="row">
                     <div class="col-sm-3">
-                        <label style="font-weight: normal"><span class="lang" key="">Id</span></label>
+                        <label style="font-weight: normal"><span class="lang" key="">Tên hoạt cảnh</span></label>
                     </div>
                     <div class="col-sm-9">
-                        <input type="text" id="txtThietBi_Id" class="form-control" />
+                        <input type="text" id="txtAction_Name" class="form-control" />
                     </div>
                 </div>
                 <!--row 2-->
                 <div class="row">
                     <div class="col-sm-3">
-                        <label style="font-weight: normal"><span class="lang" key="">Mã thiết bị</span></label>
+                        <label style="font-weight: normal"><span class="lang" key="">Mã hoạt cảnh</span></label>
                     </div>
                     <div class="col-sm-9">
-                        <input type="text" id="txtThietBi_Ma" class="form-control" />
+                        <input type="text" id="txtAction_Code" class="form-control" />
                     </div>
                 </div>
                 <!--row 3-->
                 <div class="row">
                     <div class="col-sm-3">
-                        <label style="font-weight: normal"><span class="lang" key="">Tên thiết bị</span></label>
+                        <label style="font-weight: normal"><span class="lang" key="">Người dùng</span></label>
                     </div>
                     <div class="col-sm-9">
-                        <input type="text" id="txtThietBi_Ten" class="form-control" />
+                        <select id="dropAction_User" class="select-opt"></select>
                     </div>
                 </div>
                 <!--row 4-->
                 <div class="row">
                     <div class="col-sm-3">
-                        <label style="font-weight: normal"><span class="lang" key="">Phân loại</span></label>
+                        <label style="font-weight: normal"><span class="lang" key="">Hình ảnh</span></label>
                     </div>
                     <div class="col-sm-9">
-                        <select id="dropThietBi_Loai" class="select-opt"></select>
+                        <input type="text" id="txtAction_Image" class="form-control" />
                     </div>
                 </div>
                 <!--row 5-->
                 <div class="row">
                     <div class="col-sm-3">
-                        <label style="font-weight: normal"><span class="lang" key="">Người dùng</span></label>
-                    </div>
-                    <div class="col-sm-9">
-                        <select id="dropThietBi_NguoiDung" class="select-opt"></select>
-                    </div>
-                </div>
-                <!--row 6-->
-                <div class="row">
-                    <div class="col-sm-3">
                         <label style="font-weight: normal"><span class="lang" key="">Nội dung</span></label>
                     </div>
                     <div class="col-sm-9">
-                        <input type="text" id="txtThietBi_NoiDung" class="form-control" />
+                        <input type="text" id="txtAction_Content" class="form-control" />
                     </div>
                 </div>
             </div>
             <div id="notify"></div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i><span class="lang" key=""> Đóng</span></button>
-                <a class="submit btn btn-primary" id="btnSave"><i class="fa fa-save"></i><span class="lang" key=""> Lưu</span></a>
+                <a class="submit btn btn-primary" id="btnSave_Action"><i class="fa fa-save"></i><span class="lang" key=""> Lưu</span></a>
             </div>
         </div>
     </div>
 </div>
 <!-- page script -->
-<script src="./js/process/device.js?v=1.0.0.0"></script>
+<script src="./js/process/action.js?v=1.0.0.0"></script>
 <script type="text/javascript">
-    
-    //////main
     var main_doc = {};
-    main_doc['Device'] = new Device();
+    main_doc['Action'] = new Action();
     $(document).ready(function () {
-        main_doc.Device.init();
+        main_doc.Action.init();
     });
 </script>

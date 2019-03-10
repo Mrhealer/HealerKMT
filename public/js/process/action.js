@@ -1,10 +1,10 @@
 /*----------------------------------------------
 --Author: nnthuong
 --Phone: 039 260 2793
---Date of created: 09/03/2019
+--Date of created: 10/03/2019
 ----------------------------------------------*/
-function CatDevice() { };
-CatDevice.prototype = {
+function Action() { };
+Action.prototype = {
     arrValid:[],
     strId:'',
 
@@ -20,34 +20,34 @@ CatDevice.prototype = {
             $("#myModalLabel").html('<i class="fa fa-plus"></i> Thêm mới loại thiết bị');
         });
         /*------------------------------------------
-        --Action: [cat_device] Action
+        --Action: [action] Action
         -------------------------------------------*/
-        $("#btnSave_CatDevice").click(function () {
+        $("#btnSave_Action").click(function () {
             var valid = core.util.validInputForm(me.arrValid);
             if (valid) {
                 if(core.util.checkValue(me.strId)){
-                    me.update_CatDevice();
+                    me.update_Action();
                 }
                 else{
-                    me.save_CatDevice();
+                    me.save_Action();
                 }
                 
             }
         });
-        $("#tblCatDevice").delegate(".btnEdit", "click", function () {
+        $("#tblAction").delegate(".btnEdit", "click", function () {
             var strId = this.id;
             me.strId = strId;
             $("#myModalLabel").html('<i class="fa fa-pencil"></i> Chỉnh sửa');
-            core.util.setOne_BgRow(strId, "tblCatDevice");
-            me.getDetail_CatDevice(strId);
+            core.util.setOne_BgRow(strId, "tblAction");
+            me.getDetail_Action(strId);
             return false;
         });
-        $("#tblCatDevice").delegate(".btnDelete", "click", function () {
+        $("#tblAction").delegate(".btnDelete", "click", function () {
             var strId = this.id;
             core.system.confirm("Bạn có chắc chắn muốn xóa dữ liệu?");
-            core.util.setOne_BgRow(strId, "tblCatDevice");
+            core.util.setOne_BgRow(strId, "tblAction");
             $("#btnYes").click(function (e) {
-                me.delete_CatDevice(strId);
+                me.delete_Action(strId);
             });
             return false;
         });
@@ -58,41 +58,48 @@ CatDevice.prototype = {
     page_load: function () {
         var me = this;
         core.system.page_load();
-        me.getList_CatDevice();
+        me.getList_Action();
+        setTimeout(function(){
+            me.getList_User();
+        },200);
         me.arrValid = [
             //EM-empty, FL-float, IN-int, DA-date, seperated by "#" character...
-            { "MA": "txtCatDevice_Code", "THONGTIN1": "EM" },
-            { "MA": "txtCatDevice_Name", "THONGTIN1": "EM" },
-            { "MA": "txtCatDevice_Discript", "THONGTIN1": "EM" }
+            { "MA": "dropAction_User", "THONGTIN1": "EM" },
+            { "MA": "txtAction_Name", "THONGTIN1": "EM" },
+            { "MA": "txtAction_Code", "THONGTIN1": "EM" }
         ];
         
     },
     popup: function (value) {
         //show
-        $("#myModal_CatDevice").modal("show");
+        $("#myModal_Action").modal("show");
         //event
-        $('#myModal_CatDevice').on('shown.bs.modal', function () {
-            $('#txtCatDevice_Code').val('').trigger('focus').val(value);
+        $('#myModal_Action').on('shown.bs.modal', function () {
+            $('#txtAction_Name').val('').trigger('focus').val(value);
         });
     },
     resetPopup: function () {
         var me = this;
         me.strId = "";
-        core.util.resetValById("txtCatDevice_Code");
-        core.util.resetValById("txtCatDevice_Name");
-        core.util.resetValById("txtCatDevice_Discript");
+        core.util.resetValById("dropAction_User");
+        core.util.resetValById("txtAction_Name");
+        core.util.resetValById("txtAction_Code");
+        core.util.resetValById("txtAction_Image");//image
+        core.util.resetValById("txtAction_Content");
     },
     /*------------------------------------------
-    --Discription: [cat_device] Save
+    --Discription: [action] Save
     -------------------------------------------*/
-    save_CatDevice: function () {
+    save_Action: function () {
         var me = this;
         var obj_notify = {};
         //--Edit
         var obj_save = {
-            'code': core.util.getValById("txtCatDevice_Code"),
-            'name': core.util.getValById("txtCatDevice_Name"),
-            'discript': core.util.getValById("txtCatDevice_Discript")
+            'userId': core.util.getValById("dropAction_User"),
+            'name': core.util.getValById("txtAction_Name"),
+            'code': core.util.getValById("txtAction_Code"),
+            'image': core.util.getValById("txtAction_Image"),
+            'content': core.util.getValById("txtAction_Content")
         };
         //default
         core.system.beginLoading();
@@ -121,7 +128,7 @@ CatDevice.prototype = {
                         }
                         core.system.alertOnModal(obj_notify);
                     }
-                    me.getList_CatDevice();
+                    me.getList_Action();
                 }
                 else {
                     obj_notify = {
@@ -141,7 +148,7 @@ CatDevice.prototype = {
                 core.system.alertOnModal(obj_notify);
             },
             type: "POST",
-            action: 'cat_device',
+            action: 'action',
             contentType: true,
             authen: true,
             data: obj_save,
@@ -150,17 +157,19 @@ CatDevice.prototype = {
         }, false, false, false, null);
     },
     /*------------------------------------------
-    --Discription: [cat_device] Update
+    --Discription: [action] Update
     -------------------------------------------*/
-    update_CatDevice: function () {
+    update_Action: function () {
         var me = this;
         var obj_notify = {};
         //--Edit
         var obj_save = {
             '_id': me.strId,
-            'code': core.util.getValById("txtCatDevice_Code"),
-            'name': core.util.getValById("txtCatDevice_Name"),
-            'discript': core.util.getValById("txtCatDevice_Discript")
+            'userId': core.util.getValById("dropAction_User"),
+            'name': core.util.getValById("txtAction_Name"),
+            'code': core.util.getValById("txtAction_Code"),
+            'image': core.util.getValById("txtAction_Image"),
+            'content': core.util.getValById("txtAction_Content")
         };
         //default
         core.system.beginLoading();
@@ -180,7 +189,7 @@ CatDevice.prototype = {
                         content: "Cập nhật thành công!",
                     }
                     core.system.alertOnModal(obj_notify);
-                    me.getList_CatDevice();
+                    me.getList_Action();
                 }
                 else {
                     obj_notify = {
@@ -200,7 +209,7 @@ CatDevice.prototype = {
                 core.system.alertOnModal(obj_notify);
             },
             type: "PUT",
-            action: 'cat_device',
+            action: 'action',
             contentType: true,
             authen: true,
             data: obj_save,
@@ -209,13 +218,13 @@ CatDevice.prototype = {
         }, false, false, false, null);
     },
     /*------------------------------------------
-    --Discription: [cat_device] GetList
+    --Discription: [action] GetList
     -------------------------------------------*/
-    getList_CatDevice: function () {
+    getList_Action: function () {
         var me = this;
         //--Edit
         var obj_list = {
-            'action': 'cat_device'
+            'action': 'action'
         };
 
         core.system.beginLoading();
@@ -228,19 +237,19 @@ CatDevice.prototype = {
                         dtResult = data.data;
                         iPager = data.data.length;
                     }
-                    me.genTable_CatDevice(dtResult, iPager);
+                    me.genTable_Action(dtResult, iPager);
                 }
                 else {
-                    core.system.alert("cat_device: " + JSON.stringify(data.Message), "w");
+                    core.system.alert("action: " + JSON.stringify(data.Message), "w");
                 }
                 core.system.endLoading();
             },
             error: function (er) {
-                core.system.alert("cat_device (er): " + JSON.stringify(er), "w");
+                core.system.alert("action (er): " + JSON.stringify(er), "w");
                 core.system.endLoading();
             },
             type: "GET",
-            action: 'cat_device',
+            action: 'action',
             contentType: true,
             authen: false,
             data: {},
@@ -249,31 +258,37 @@ CatDevice.prototype = {
             ]
         }, false, false, false, null);
     },
-    genTable_CatDevice: function (data, iPager) {
+    genTable_Action: function (data, iPager) {
         var me = this;
-        core.util.viewHTMLById("lblTotal_CatDevice", iPager);
+        core.util.viewHTMLById("lblTotal_Action", iPager);
         var jsonForm = {
-            strTable_Id: "tblCatDevice",
+            strTable_Id: "tblAction",
             aaData: data,
             bPaginate: {
-                strFuntionName: "main_doc.CatDevice.getList_CatDevice()",
+                strFuntionName: "main_doc.Action.getList_Action()",
                 iDataRow: iPager
             },
             bHiddenHeader: true,
             colPos: {
-                center: [0, 4, 5],
+                center: [0, 1, 6, 7],
                 left: [1],
                 fix: [0]
             },
             aoColumns: [
                 {
+                    "mDataProp": "image",
+                }
+                , {
                     "mDataProp": "code",
                 }
                 , {
                     "mDataProp": "name",
                 }
                 , {
-                    "mDataProp": "discript",
+                    "mDataProp": "userId",
+                }
+                ,  {
+                    "mDataProp": "content",
                 }
                 , {
                     "mRender": function (nRow, aData) {
@@ -291,9 +306,9 @@ CatDevice.prototype = {
         /*III. Callback*/
     },
     /*------------------------------------------
-    --Discription: [cat_device] GetDetail
+    --Discription: [action] GetDetail
     -------------------------------------------*/
-    getDetail_CatDevice: function (strId) {
+    getDetail_Action: function (strId) {
         var me = this;
 
         core.system.beginLoading();
@@ -309,7 +324,7 @@ CatDevice.prototype = {
                 }
                 if (data.success) {
                     if (core.util.checkValue(data.data)) {
-                        me.viewForm_CatDevice(data.data);
+                        me.viewForm_Action(data.data);
                     }
                 }
                 else {
@@ -322,7 +337,7 @@ CatDevice.prototype = {
                 core.system.alert(obj_detail.action + " (er): " + JSON.stringify(er), "w");
             },
             type: "GET",
-            action: 'cat_device/' + strId,
+            action: 'action/' + strId,
             contentType: true,
             authen: true,
             data: {},
@@ -330,19 +345,21 @@ CatDevice.prototype = {
             ]
         }, false, false, false, null);
     },
-    viewForm_CatDevice: function (data) {
+    viewForm_Action: function (data) {
         var me = this;
         //call popup --Edit
-        me.popup(data.code);
+        me.popup(data.name);
         //view data --Edit
-        core.util.viewValById("txtCatDevice_Code", data.code);
-        core.util.viewValById("txtCatDevice_Name", data.name);
-        core.util.viewValById("txtCatDevice_Discript", data.discript);
+        core.util.viewValById("dropAction_User", data.userId);
+        core.util.viewValById("txtAction_Name", data.name);
+        core.util.viewValById("txtAction_Code", data.code);
+        core.util.viewValById("txtAction_Image", data.image);
+        core.util.viewValById("txtAction_Content", data.content);
     },
     /*------------------------------------------
-    --Discription: [cat_device] Delete
+    --Discription: [action] Delete
     -------------------------------------------*/
-    delete_CatDevice: function (strId) {
+    delete_Action: function (strId) {
         var me = this;
         //--Edit
         var obj_delete = {
@@ -363,7 +380,7 @@ CatDevice.prototype = {
                         code: ""
                     };
                     core.system.afterComfirm(obj);
-                    me.getList_CatDevice();
+                    me.getList_Action();
                 }
                 else {
                     obj = {
@@ -385,7 +402,7 @@ CatDevice.prototype = {
                 core.system.afterComfirm(obj);
             },
             type: "DELETE",
-            action: 'cat_device',
+            action: 'action',
             contentType: true,
             authen: true,
             data: obj_delete,
@@ -393,4 +410,56 @@ CatDevice.prototype = {
             ]
         }, false, false, false, null);
     },
+    /*------------------------------------------
+    --Discription: [user] GetList
+    -------------------------------------------*/
+    getList_User: function(){
+        var me = this;
+        
+        core.system.beginLoading();
+        core.system.makeRequest({
+            success: function (data) {
+                if (data.success) {
+                    var dtResult = [];
+                    var iPager = 0;
+                    if (core.util.checkValue(data.data)) {
+                        dtResult = data.data;
+                        iPager = data.data.length;
+                    }
+                    me.genCombo_User(dtResult, iPager);
+                }
+                else {
+                    core.system.alert("device: " + JSON.stringify(data.Message), "w");
+                }
+                core.system.endLoading();
+            },
+            error: function (er) {
+                core.system.alert("device (er): " + JSON.stringify(er), "w");
+                core.system.endLoading();
+            },
+            type: "GET",
+            action: 'user',
+            contentType: true,
+            authen: false,
+            data: {},
+            fakedb: [
+
+            ]
+        }, false, false, false, null);
+    },
+    genCombo_User:function(data){
+        var me = this;
+        var obj = {
+            data: data,
+            renderInfor: {
+                id: "_id",
+                parentId: "",
+                name: "name",
+                code: ""
+            },
+            renderPlace: ["dropAction_User"],
+            title: "Chọn người dùng"
+        };
+        core.system.loadToCombo_data(obj);
+    }
 }

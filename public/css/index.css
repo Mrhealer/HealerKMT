@@ -143,6 +143,9 @@ a:hover{
     color:#4e8d42;
     cursor:pointer;
 }
+.small-box{
+    margin-bottom: 0px !important;
+}
 /*----------Định dạng lại _all_Skin.min.css------------*/
 .skin-blue .main-header .navbar { /*nav-head*/
     background-color: #4e8d42 !important;

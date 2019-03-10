@@ -1,0 +1,23 @@
+
+
+userId
+actionName -- Di lam
+actionImg  -- Hinh anh
+actionContent -- Tat
+
+
+--- Hoat Canh ---
+- cl_action
+
++ userId
++ name
++ code
++ image
++ content
+--- Hoat Canh-Hanh Dong ---
+- cl_action_device
+
++ actionId
++ deviceId
++ statusId
+

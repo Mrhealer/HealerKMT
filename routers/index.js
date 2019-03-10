@@ -6,6 +6,8 @@ router.use(require('../controllers/authen'));
 router.use(require('../controllers/user'));
 router.use(require('../controllers/device'));
 router.use(require('../controllers/cat_device'));
+router.use(require('../controllers/action'));
+router.use(require('../controllers/action_device'));
 //Other routes here [all the routes that not match any route above]
 router.get('*', function(req, res){
     res.send('Sorry, this is an invalid URL.');

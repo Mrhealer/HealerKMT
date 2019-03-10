@@ -1,0 +1,142 @@
+<section class="content-header">
+    <div class="col-lg-12">
+        <ul class="list-group">
+            <li class="list-group-item list-group-title" id="lblPath_ChucNang">
+                <a onclick="" class="list-group-a"><span class="fa fa-home"></span> Bảng điều khiển</a>
+                <span class="sub-path opacity-5"> / Quản lý hoạt cảnh</span>
+                <a style="float:right; cursor: pointer" data-toggle="popover" data-placement="left" title="Help" data-content="intro.user"><i class="fa fa-question-circle fa-customer"></i></a>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row ">
+        <!-- /.left-content -->
+        <div class="col-lg-3">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <!-- Bộ tìm kiếm -->
+                    <div class="bs-item input-group">
+                        <input type="text" id="txtSearch_NghiHuu_TuKhoa" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+                        <span class="input-group-addon poiter btnExtend_Search" title="Kéo xuống">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title" title="Tổng bài báo trong nước">
+                        <i class="fa fa-hdd-o"></i> Danh sách hoạt cảnh
+                        <span class="badge bg-light-blue">
+                            <span id="lblTotalAC_Action">0</span>
+                        </span>
+                    </h3>
+                </div>
+                <div class="box-body">
+                    <table id="tblAC_Action" class="table table-hover">
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /.right-content -->
+        <div class="col-lg-9">
+            <!-- box Danh sach thiet bi dieu khien -->
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <i class="fa fa-hdd-o"></i> Thiết bị theo hoạt cảnh 
+                    </h3>
+                    <div class="pull-right">
+                        <a class="btn btn-primary poiter" id="btnCallModal"><i class="fa fa-plus"></i> Thêm</a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="col-sm-12">
+                        <table id="tblAC_Action_Device" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="td-fixed td-center">Stt</th>
+                                    <th class="td-center">Hoạt cảnh</th>
+                                    <th class="td-left">Thiết bị</th>
+                                    <th class="td-right">Trạng thái</th>
+                                    <th class="td-fixed td-center">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="myModalAC" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel"><span class="lang" key="">--</span></h4>
+            </div>
+            <div class="modal-body">
+                <!--row 1-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Người dùng</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <select id="dropAC_User" class="select-opt"></select>
+                    </div>
+                </div>
+                <!--row 1-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Hoạt cảnh</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <select id="dropAC_Action" class="select-opt"></select>
+                    </div>
+                </div>
+                <!--row 2-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Thiết bị</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <select id="dropAC_Device" class="select-opt"></select>
+                    </div>
+                </div>
+                <!--row 3-->
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label style="font-weight: normal"><span class="lang" key="">Trạng thái</span></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <select id="dropAC_Status" class="select-opt">
+                            <option value="">-- Chọn trạng thái hoạt cảnh --</option>
+                            <option value="ON">ON</option>
+                            <option value="OFF">OFF</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="notify"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i><span class="lang" key=""> Đóng</span></button>
+                <a class="submit btn btn-primary" id="btnSave_AC"><i class="fa fa-save"></i><span class="lang" key=""> Lưu</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page script -->
+<script src="./js/process/action_device.js?v=1.0.0.0"></script>
+<script type="text/javascript">
+    var main_doc = {};
+    main_doc['Action_Device'] = new Action_Device();
+    $(document).ready(function () {
+        main_doc.Action_Device.init();
+    });
+</script>

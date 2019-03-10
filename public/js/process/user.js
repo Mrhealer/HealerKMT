@@ -1,10 +1,11 @@
 /*----------------------------------------------
 --Author: nnthuong
---Phone: 0169 260 2793
+--Phone: 039 260 2793
 --Date of created: 
 ----------------------------------------------*/
 function User() { };
 User.prototype = {
+    strId: '',
 
     init: function () {
         var me = this;
@@ -20,6 +21,9 @@ User.prototype = {
             me.getDetail_User(strId);
             setTimeout(function(){
                 me.getList_User_Device(strId);
+                setTimeout(function(){
+                    me.getList_ActionByUser(strId);
+                }, 200);
             }, 200);
             return false;
         });
@@ -206,7 +210,7 @@ User.prototype = {
             },
             bHiddenHeader: true,
             colPos: {
-                center: [0, 1],
+                center: [0, 1, 4],
                 left: [2],
                 right: [3],
                 fix: [0]
@@ -236,4 +240,72 @@ User.prototype = {
         core.system.loadToTable_data(jsonForm);
         /*III. Callback*/
     },
+     /*------------------------------------------
+    --Discription: [Action]  GetList
+    -------------------------------------------*/
+    getList_ActionByUser: function(strUserId){
+        var me = this;
+        
+        core.system.beginLoading();
+        core.system.makeRequest({
+            success: function (data) {
+                if (data.success) {
+                    var dtResult = [];
+                    var iPager = 0;
+                    if (core.util.checkValue(data.data)) {
+                        dtResult = data.data;
+                        iPager = data.data.length;
+                    }
+                    me.genBox_ActionByUser(dtResult);
+                }
+                else {
+                    core.system.alert("user_action: " + JSON.stringify(data.Message), "w");
+                }
+                core.system.endLoading();
+            },
+            error: function (er) {
+                core.system.alert("user_action (er): " + JSON.stringify(er), "w");
+                core.system.endLoading();
+            },
+            type: "GET",
+            action: 'user_action/' + strUserId,
+            contentType: true,
+            authen: false,
+            data: {},
+            fakedb: [
+
+            ]
+        }, false, false, false, null);
+    },
+    genBox_ActionByUser: function (data, iPager) {
+        var me = this;
+        var html = '';
+        var strAction_Id = "";
+        var strAction_Code = "";
+        var strAction = "";
+
+        $("#zoneAction").html(html);
+        //
+        for (var i = 0; i < data.length; i++) {
+            strAction_Id = data[i]._id;
+            strAction_Code = data[i].code;
+            strAction_Name = data[i].name;
+
+            html += '<div class="col-sm-2 col-xs-4">';
+            html += '<div class="small-box">';
+
+            html += '<div class="inner">';
+            html += '<h4>' + strAction_Name + '</h4>';
+            html += '<p class="italic">' + strAction_Code + '</p>';
+            html += '</div>';
+            
+            html += '<div class="small-box-footer">';
+            html += '<a id="view_' + strAction_Id + '" class="cl-active poiter">Xem</a>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div >';
+        }
+        //
+        $("#zoneAction").html(html);
+    }
 }
