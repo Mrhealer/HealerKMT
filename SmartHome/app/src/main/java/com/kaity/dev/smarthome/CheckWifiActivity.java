@@ -51,7 +51,6 @@ public class CheckWifiActivity extends AppCompatActivity {
     private static final String COMPONENT_SETTINGS = "com.android.settings";
     private static final String COMPONENT_WIFI_SETTINGS = "com.android.settings.wifi.WifiSettings";
     private static final int DELAY_INDEX = 5000;
-    private TextView mTextConfigure;
     private ImageView mImageRipple;
     private Ripple ripple;
     private EditText mEdt_NameWF, mEdt_PasswordWF;
@@ -100,8 +99,8 @@ public class CheckWifiActivity extends AppCompatActivity {
         mEdt_PasswordWF = findViewById(R.id.edt_Password_Wifi);
         final Handler handler = new Handler();
         mImageRipple = findViewById(R.id.centerImage);
-        mTextConfigure = findViewById(R.id.tv_Configure);
-        mTextConfigure.setOnClickListener(new View.OnClickListener() {
+        TextView textConfigure = findViewById(R.id.tv_Configure);
+        textConfigure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = mEdt_NameWF.getText().toString().trim();
