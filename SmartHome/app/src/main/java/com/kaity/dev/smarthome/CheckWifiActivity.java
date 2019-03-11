@@ -4,16 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +39,6 @@ import com.kaity.dev.smarthome.VolleyLib.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 
@@ -47,6 +47,9 @@ public class CheckWifiActivity extends AppCompatActivity {
     private static final String TAG = CheckWifiActivity.class.getSimpleName();
     private static final String NAME_WIFI_DEFAULT = "SMARTHOME";
     private static final String WIFI_KEY = "1234567899";
+    private static final String KEY_RESULT_DEFAULT = "setupwifi";
+    private static final String COMPONENT_SETTINGS = "com.android.settings";
+    private static final String COMPONENT_WIFI_SETTINGS = "com.android.settings.wifi.WifiSettings";
     private static final int DELAY_INDEX = 5000;
     private TextView mTextConfigure;
     private ImageView mImageRipple;
@@ -68,7 +71,7 @@ public class CheckWifiActivity extends AppCompatActivity {
                             VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
                         }
                     } else {
-                        Toast.makeText(context, "Không đúng SSID SMARTHOME", Toast.LENGTH_LONG).show();
+                        Logger.w(TAG, "mReceiver", "SSID SMARTHOME not correct");
                     }
                 } else {
                     Logger.w(TAG, "mReceiver", "isConnected not connected ");
@@ -104,21 +107,28 @@ public class CheckWifiActivity extends AppCompatActivity {
                 String name = mEdt_NameWF.getText().toString().trim();
                 String password = mEdt_PasswordWF.getText().toString().trim();
                 if (TextUtils.isEmpty(name) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "SSID or Password not Empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.message_input_wifi), Toast.LENGTH_LONG).show();
                 } else {
-                    ripple.startRippleAnimation();
-                    mIsRequest = true;
-                    mUrl = "http://192.168.4.1/setting?ssid=" + name + "&pass=" + password + "&link=192.168.1.2";
-                    setPreSharedKey(getApplicationContext(), NAME_WIFI_DEFAULT, WIFI_KEY);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            foundDevice();
-                        }
-                    }, DELAY_INDEX);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, null);
+                        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                        ComponentName componentName = new ComponentName(COMPONENT_SETTINGS, COMPONENT_WIFI_SETTINGS);
+                        intent.setComponent(componentName);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    } else {
+                        ripple.startRippleAnimation();
+                        mIsRequest = true;
+                        mUrl = "http://192.168.4.1/setting?ssid=" + name + "&pass=" + password + "&link=192.168.1.2";
+                        setPreSharedKey(getApplicationContext(), NAME_WIFI_DEFAULT, WIFI_KEY);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                foundDevice();
+                            }
+                        }, DELAY_INDEX);
+                    }
                 }
-
-
             }
         });
     }
@@ -162,7 +172,7 @@ public class CheckWifiActivity extends AppCompatActivity {
                 wifiManager.disconnect();
                 wifiManager.enableNetwork(netId, true);
                 wifiManager.reconnect();
-                Logger.i(TAG, "searchSSID", "ssid: " + conf.SSID);
+                Logger.i(TAG, "setPreSharedKey", "ssid: " + conf.SSID);
             } else {
                 Logger.w(TAG, "setPreSharedKey", "wifiManager null ");
             }
@@ -197,23 +207,17 @@ public class CheckWifiActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
             try {
-                Object data = new JSONTokener(response);
-                if (data instanceof JSONObject) {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String result = jsonObject.optString("setupwifi");
-                    if ("ok".equalsIgnoreCase(result)) {
-                        Toast.makeText(getApplicationContext(), "Setup Ok", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(CheckWifiActivity.this, HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Setup không thành công", Toast.LENGTH_LONG).show();
-                    }
+                JSONObject jsonObject = new JSONObject(response);
+                String result = jsonObject.optString(KEY_RESULT_DEFAULT);
+                if ("ok".equalsIgnoreCase(result)) {
+                    Intent intent = new Intent(CheckWifiActivity.this, HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Dữ Liệu Trả về là Array", Toast.LENGTH_LONG).show();
+                    Logger.w(TAG, "stringRequest", "Setup Error");
                 }
             } catch (JSONException e) {
-                Logger.i(TAG, "stringRequest", "JSONException: ");
+                Logger.e(TAG, "stringRequest", "JSONException: ");
             }
         }
     }, new Response.ErrorListener() {

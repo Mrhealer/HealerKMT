@@ -112,4 +112,7 @@
     <string name="input_type_Device">Phân Loại Device</string>
     <string name="button_submit">Submit</string>
 
+    <!-- Check Wifi Screen -->
+    <string name="message_input_wifi">SSID or Password not Empty</string>
+
 </resources>
