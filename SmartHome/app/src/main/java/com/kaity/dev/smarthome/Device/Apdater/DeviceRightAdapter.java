@@ -9,17 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kaity.dev.smarthome.Device.Model.DeviceRightMode;
+import com.kaity.dev.smarthome.Device.Model.DeviceModel;
 import com.kaity.dev.smarthome.R;
 
 import java.util.ArrayList;
 
 public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.MyHolderView> {
-    private ArrayList<DeviceRightMode> mArrayList;
+    private ArrayList<DeviceModel> mArrayList;
     private Context mContext;
     private DeviceAdapter.onClickListenerDevice mOnClickListener;
 
-    public DeviceRightAdapter(Context context,ArrayList<DeviceRightMode> mArrayList, DeviceAdapter.onClickListenerDevice onClickListener) {
+    public DeviceRightAdapter(Context context,ArrayList<DeviceModel> mArrayList, DeviceAdapter.onClickListenerDevice onClickListener) {
         this.mContext = context;
         this.mArrayList = mArrayList;
         this.mOnClickListener = onClickListener;
@@ -48,7 +48,7 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
 
         private TextView tv;
         private ImageView imageView;
-        private DeviceRightMode deviceModel;
+        private DeviceModel deviceModel;
 
         public MyHolderView(@NonNull View itemView) {
             super(itemView);
@@ -57,7 +57,7 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
             imageView = (ImageView) itemView.findViewById(R.id.img_device_right);
         }
 
-        public void setData(DeviceRightMode deviceModel) {
+        public void setData(DeviceModel deviceModel) {
             tv.setText(deviceModel.getmName());
             if (imageView == null) {
                 imageView.setImageResource(R.drawable.room_background);

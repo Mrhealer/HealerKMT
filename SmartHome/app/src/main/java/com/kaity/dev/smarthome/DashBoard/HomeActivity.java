@@ -32,7 +32,6 @@ import com.kaity.dev.smarthome.Device.Apdater.DeviceAdapter;
 import com.kaity.dev.smarthome.Device.Apdater.DeviceRightAdapter;
 import com.kaity.dev.smarthome.Device.Apdater.StageAdapter;
 import com.kaity.dev.smarthome.Device.Model.DeviceModel;
-import com.kaity.dev.smarthome.Device.Model.DeviceRightMode;
 import com.kaity.dev.smarthome.Device.Model.StageModel;
 import com.kaity.dev.smarthome.R;
 import com.kaity.dev.smarthome.SmartHomeCallBack;
@@ -63,7 +62,7 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
     private RecyclerView mRecyclerViewRightDevice;
     private ArrayList<StageModel> mArrayListStage;
     private ArrayList<DeviceModel> mArrayListDevice;
-    private ArrayList<DeviceRightMode> mArrayListRightDevice;
+    private ArrayList<DeviceModel> mArrayListRightDevice;
     private int mCountDeviceSize;
     private BottomSheetBehavior mBottomSheetBehavior;
 
@@ -77,6 +76,7 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mArrayListDevice = getAllDeviceArrayList();
+        mArrayListRightDevice = getAllDeviceArrayList();
         initDrawerLayout();
         initDataStage();
         initDataDevice();
@@ -154,28 +154,6 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
 
     private void initRightDevice() {
-        mArrayListRightDevice = new ArrayList<>();
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.quat_pk), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.quat_bep), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.quat_tang2), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.den_pk1), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.den_pk2), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.den_pk3), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.den_pk4), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.den_pk5), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.loa), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.binh_nong_lanh), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.may_say), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.may_giat), R.drawable.device, "#333"));
-        mArrayListRightDevice.add(new DeviceRightMode(getString(R.string.dieu_hoa), R.drawable.device, "#333"));
-
-        // specify an adapter (see also next example)
-        ArrayList<String> myDataset = new ArrayList<String>();
-
-        for (int i = 0; i < mArrayListRightDevice.size(); i++) {
-            myDataset.add(mArrayListRightDevice.get(i).getmName().toString());
-        }
-
         DeviceRightAdapter adapter = new DeviceRightAdapter(this, mArrayListRightDevice, this);
         adapter.notifyDataSetChanged();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

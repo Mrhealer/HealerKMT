@@ -13,6 +13,7 @@ import com.kaity.dev.smarthome.Utils.Constants;
 import com.kaity.dev.smarthome.Utils.Logger;
 
 import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
