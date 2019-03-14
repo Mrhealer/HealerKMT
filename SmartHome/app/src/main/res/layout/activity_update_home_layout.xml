@@ -49,7 +49,7 @@
         android:hint="@string/input_Id_Device" />
 
     <EditText
-        android:id="@+id/edt_input_ID_Device"
+        android:id="@+id/edt_input_Code_Device"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
@@ -58,7 +58,7 @@
         android:background="@drawable/rounded_border_edittext"
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/input_ma_Device" />
+        android:hint="@string/input_Code_Device" />
 
     <EditText
         android:id="@+id/edt_input_Name_Device"

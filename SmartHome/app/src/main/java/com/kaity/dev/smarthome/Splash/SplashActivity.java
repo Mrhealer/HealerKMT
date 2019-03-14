@@ -2,15 +2,12 @@ package com.kaity.dev.smarthome.Splash;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -50,46 +47,28 @@ public class SplashActivity extends AppCompatActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.img_logo_splash);
         imageView.clearAnimation();
         imageView.startAnimation(animation);
-        slideDown(imageView);
-//        mSplashThread = new Thread() {
-//            @Override
-//            public void run() {
-//                try {
-//                    int waited = 0;
-//                    while (waited < WAITED_INDEX) {
-//                        sleep(DEFAULT_SLEEP);
-//                        waited += DEFAULT_SLEEP;
-//                    }
-//                    imageView.clearAnimation();
-//                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//                    startActivity(intent);
-//                    SplashActivity.this.finish();
-//
-//                } catch (InterruptedException e) {
-//                    Logger.e(TAG, "startAnimation ", "startAnimation");
-//                } finally {
-//                    SplashActivity.this.finish();
-//                }
-//            }
-//        };
-//        mSplashThread.start();
-    }
-
-    public void slideDown(final View view) {
-        TranslateAnimation animate = new TranslateAnimation(
-                1500,                 // fromXDelta
-                5,                 // toXDelta
-                90,                 // fromYDelta
-                view.getHeight()); // toYDelta
-        animate.setDuration(500);
-        animate.setFillAfter(true);
-        view.startAnimation(animate);
-        new Handler().postDelayed(new Runnable() {
+        mSplashThread = new Thread() {
             @Override
             public void run() {
-                view.setVisibility(View.GONE);
+                try {
+                    int waited = 0;
+                    while (waited < WAITED_INDEX) {
+                        sleep(DEFAULT_SLEEP);
+                        waited += DEFAULT_SLEEP;
+                    }
+                    imageView.clearAnimation();
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(intent);
+                    SplashActivity.this.finish();
+
+                } catch (InterruptedException e) {
+                    Logger.e(TAG, "startAnimation ", "startAnimation");
+                } finally {
+                    SplashActivity.this.finish();
+                }
             }
-        }, 500);
+        };
+        mSplashThread.start();
     }
 }

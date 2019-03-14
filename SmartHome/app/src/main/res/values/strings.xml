@@ -106,7 +106,7 @@
     <!-- Add Device-->
     <string name="add_device">Add Device</string>
     <string name="input_Id_Device">Nhập ID</string>
-    <string name="input_ma_Device">Nhập Mã Device</string>
+    <string name="input_Code_Device">Nhập Code Device</string>
     <string name="input_name_Device">Nhập Tên Device</string>
     <string name="input_content_Device">Nhập Nội Dung Device</string>
     <string name="input_type_Device">Phân Loại Device</string>

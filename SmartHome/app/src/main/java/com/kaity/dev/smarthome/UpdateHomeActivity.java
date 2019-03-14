@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.kaity.dev.smarthome.VolleyLib.AddDeviceHelper;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -19,7 +21,7 @@ public class UpdateHomeActivity extends AppCompatActivity implements View.OnClic
 
     private static final String TAG = UpdateHomeActivity.class.getSimpleName();
     private ImageView mImageChose;
-    private EditText mEdt_InputID, mEdt_InputIDDevice, mEdt_Input_Name_Device, mEdt_Content_Device, mEdt_Type_Device;
+    private EditText mEdt_InputID, mEdt_InputCodeDevice, mEdt_Input_Name_Device, mEdt_Content_Device, mEdt_Type_Device;
     private Button mButton_AddDevice;
     private int PICK_IMAGE_REQUEST = 1;
     private Bitmap mBitmap;
@@ -34,7 +36,7 @@ public class UpdateHomeActivity extends AppCompatActivity implements View.OnClic
     private void initView() {
         mImageChose = findViewById(R.id.img_Add_Device);
         mEdt_InputID = findViewById(R.id.edt_input_ID);
-        mEdt_InputIDDevice = findViewById(R.id.edt_input_ID_Device);
+        mEdt_InputCodeDevice = findViewById(R.id.edt_input_Code_Device);
         mEdt_Input_Name_Device = findViewById(R.id.edt_input_Name_Device);
         mEdt_Content_Device = findViewById(R.id.edt_input_Content_Device);
         mEdt_Type_Device = findViewById(R.id.edt_input_Type_Device);
@@ -48,6 +50,12 @@ public class UpdateHomeActivity extends AppCompatActivity implements View.OnClic
             case R.id.img_Add_Device:
                 break;
             case R.id.btn_Submit_Device:
+                String idDevice = mEdt_InputID.getText().toString().trim();
+                String codeDevice = mEdt_InputCodeDevice.getText().toString().trim();
+                String nameDevice = mEdt_Input_Name_Device.getText().toString().trim();
+                String contentDevice = mEdt_Content_Device.getText().toString().trim();
+                String categoryDevice = mEdt_Type_Device.getText().toString().trim();
+                new AddDeviceHelper(this, null, idDevice, codeDevice, nameDevice, contentDevice, categoryDevice);
                 break;
         }
     }
