@@ -48,7 +48,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class HomeActivity extends AppCompatActivity implements StageAdapter.onClickStage, StageAdapter.onLongItemClickStage, DeviceAdapter.onClickListenerDevice, SmartHomeCallBack {
+public class HomeActivity extends AppCompatActivity implements StageAdapter.onClickStage,
+        StageAdapter.onLongItemClickStage, DeviceAdapter.onClickListenerDevice, SmartHomeCallBack {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -63,7 +64,7 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
     private ArrayList<StageModel> mArrayListStage;
     private ArrayList<DeviceModel> mArrayListDevice;
     private ArrayList<DeviceModel> mArrayListRightDevice;
-    private int mCountDeviceSize;
+    private int mCountDeviceSize, mCountStageSize;
     private BottomSheetBehavior mBottomSheetBehavior;
 
     @Override
@@ -71,12 +72,14 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_layout);
         mCountDeviceSize = 0;
+        mCountStageSize = 0;
         mArrayList = new ArrayList<>();
         init();
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mArrayListDevice = getAllDeviceArrayList();
         mArrayListRightDevice = getAllDeviceArrayList();
+        mArrayListStage = getAllActionArrayList();
         initDrawerLayout();
         initDataStage();
         initDataDevice();
@@ -94,13 +97,9 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
     }
 
     private void initDataStage() {
-        mArrayListStage = new ArrayList<>();
-        mArrayListStage.add(new StageModel(getString(R.string.ve_nha), R.drawable.venha, "#333"));
-        mArrayListStage.add(new StageModel(getString(R.string.di_lam), R.drawable.dilam, "#333"));
-        mArrayListStage.add(new StageModel(getString(R.string.nau_an), R.drawable.nauan, "#333"));
-        mArrayListStage.add(new StageModel(getString(R.string.di_ngu), R.drawable.dingu, "#333"));
-        mArrayListStage.add(new StageModel(getString(R.string.thuc_day), R.drawable.thucday, "#333"));
-        mArrayListStage.add(new StageModel(getString(R.string.di_tam), R.drawable.ditam, "#333"));
+        if (mArrayListStage != null) {
+            mCountStageSize = mArrayListStage.size();
+        }
         StageAdapter stageAdapter = new StageAdapter(this, mArrayListStage, this, this);
         stageAdapter.notifyDataSetChanged();
         mRecyclerViewStage.setItemAnimator(new DefaultItemAnimator());
@@ -121,6 +120,34 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         mRecyclerViewDevice.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerViewDevice.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerViewDevice.setAdapter(adapter);
+    }
+
+    private ArrayList<StageModel> getAllActionArrayList() {
+        final ArrayList<StageModel> arrayList = new ArrayList<>();
+        StringRequest stringRequest = new StringRequest(Constants.ACTION_USER_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        String nameDevice = jsonArray.getJSONObject(i).getString("name");
+                        arrayList.add(new StageModel(nameDevice, R.drawable.venha, ""));
+                    }
+                    onLoadStateSuccess(arrayList);
+                    Logger.i(this, "getAllActionArrayList", "onResponse " + arrayList.toString());
+                } catch (JSONException e) {
+                    Logger.e(this, "getAllActionArrayList", "JSONException " + e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Logger.e(this, "getAllActionArrayList", "onErrorResponse ");
+            }
+        });
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        return arrayList;
     }
 
     private ArrayList<DeviceModel> getAllDeviceArrayList() {
@@ -308,6 +335,19 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
     }
 
+    @Override
+    public void onLoadStateSuccess(ArrayList<StageModel> arrayList) {
+        if (mCountStageSize != 0) {
+            if (mCountStageSize != arrayList.size()) {
+                updateAction(arrayList);
+            } else {
+                Logger.i(this, "onLoadStateSuccess", "not need reset screen");
+            }
+        } else {
+            updateAction(arrayList);
+        }
+    }
+
     private void updateRecyclerViewDevice(ArrayList<DeviceModel> arrayList) {
         Logger.i(this, "updateRecyclerViewDevice", "listDevice : " + arrayList.size());
         if (mRecyclerViewDevice != null) {
@@ -324,5 +364,18 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         mRecyclerViewDevice.setAdapter(adapter);
     }
 
+    private void updateAction(ArrayList<StageModel> arrayList) {
+        Logger.i(this, "updateAction", "listDevice : " + arrayList.size());
+        if (mRecyclerViewStage != null) {
+            while (mRecyclerViewStage.getItemDecorationCount() > 0) {
+                mRecyclerViewStage.removeItemDecorationAt(0);
+            }
+        }
+        StageAdapter stageAdapter = new StageAdapter(this, mArrayListStage, this, this);
+        stageAdapter.notifyDataSetChanged();
+        mRecyclerViewStage.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerViewStage.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
+        mRecyclerViewStage.setAdapter(stageAdapter);
+    }
 
 }
