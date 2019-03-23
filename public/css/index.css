@@ -743,6 +743,9 @@ thead
 .bg-rosybrown {
     background: rosybrown
 }
+.bg-ghostwhite{
+    background: ghostwhite
+}
 /*-----------------form input------------------*/
 .form-border-none {
     border: none !important;

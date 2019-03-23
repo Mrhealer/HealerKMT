@@ -1,0 +1,183 @@
+<section class="content-header">
+        <div class="col-lg-12">
+            <ul class="list-group">
+                <li class="list-group-item list-group-title" id="lblPath_ChucNang">
+                    <a onclick="" class="list-group-a"><span class="fa fa-home"></span> Bảng điều khiển</a>
+                    <span class="sub-path opacity-5"> / Quản lý người dùng</span>
+                    <a style="float:right; cursor: pointer" data-toggle="popover" data-placement="left" title="Help" data-content="intro.user"><i class="fa fa-question-circle fa-customer"></i></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row ">
+            <!-- /.left-content -->
+            <div class="col-lg-3">
+                <div class="box box-solid">
+                    <div class="box-body">
+                        <!-- Bộ tìm kiếm -->
+                        <div class="bs-item input-group">
+                            <input type="text" id="txtSearch_NghiHuu_TuKhoa" class="form-control" placeholder="Nhập từ khóa tìm kiếm">
+                            <span class="input-group-addon poiter btnExtend_Search" title="Kéo xuống">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" title="">
+                            <i class="fa fa-hdd-o"></i> Danh sách khách hàng 
+                            <span class="badge bg-light-blue">
+                                <span id="lblTotal_User">0</span>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="tblUser" class="table table-hover">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.right-content -->
+            <div class="col-lg-9">
+                <!-- box Thong tin co ban -->
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-info"></i> Thông tin chung</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <div class="box box-solid">
+                                <div class="box-body">
+                                    <div class="col-sm-12 box-view">
+                                        <!-- Row Thong tin co ban -->
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <img src="./images/user.png" style="width:70%; height:70%">
+                                            </div>
+                                            <div class="col-sm-10">
+                                                <div class="row sub-row">
+                                                    <div class="col-sm-2">
+                                                        <div class="title-name">
+                                                            1) Họ tên:
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <span class="bold cl-active" id="lblUser_Name"></span>
+                                                    </div>
+                                                </div>
+                
+                                                <div class="row sub-row">
+                                                    <div class="col-sm-2">
+                                                        <div class="title-name">
+                                                            2) Địa chỉ:
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <span id="lblUser_Address"></span>
+                                                    </div>
+                                                </div>
+                
+                                                <div class="row sub-row">
+                                                    <div class="col-sm-2">
+                                                        <div class="title-name">
+                                                            3) Email:
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <span id="lblUser_Email"></span>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="title-name">
+                                                            4) Điện thoại:
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <span id="lblUser_Phone"></span>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- box Danh sach thiet bi dieu khien -->
+                <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">
+                                <i class="fa fa-image"></i> Hoạt cảnh
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-sm-12">
+                                <div id="zoneAction"></div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- box Danh sach thiet bi dieu khien -->
+                <div class="box box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">
+                            <i class="fa fa-sun-o"></i> Thiết bị điều khiển 
+                            <span class="badge bg-light-blue">
+                                <span id="lblTotal_User_Device">0</span>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-sm-12">
+                            <table id="tblUser_Device" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="td-center">Stt</th>
+                                        <th class="td-center">Hình ảnh</th>
+                                        <th class="td-left">Tên thiết bị</th>
+                                        <th class="td-right">Tình trạng</th>
+                                        <th class="td-center">Chuyển công tắc</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--
+                                    <tr>
+                                        <td class="td-center">1</td>
+                                        <td class="td-left">Bóng đèn phòng khách</td>
+                                        <td class="td-right"> <small class="label label-danger">Off</small></td>
+                                        <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-off"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-center">2</td>
+                                        <td class="td-left">Điều hòa</td>
+                                        <td class="td-right"><small class="label label-success">On</small></td>
+                                        <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-on"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-center">3</td>
+                                        <td class="td-left">Nồi cơm điện</td>
+                                        <td class="td-right"><small class="label label-success">On</small></td>
+                                        <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-on"></i></a></td>
+                                    </tr>
+                                    -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page script -->
+    <script src="./js/process/user_device.js?v=1.0.0.0"></script>
+    <script type="text/javascript">
+        var main_doc = {};
+        main_doc['User_Device'] = new User_Device();
+        $(document).ready(function () {
+            main_doc.User_Device.init();
+        });
+    </script>

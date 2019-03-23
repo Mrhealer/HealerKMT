@@ -20,7 +20,9 @@ var UserSchema = new mongoose.Schema({
     username: String,
     password: String,
     phone: String,
-    address: String
+    address: String,
+    avatar: String,
+    status: String //[1 -  Enable, 0 - Disable, -1 - Block]
 });
 
 module.exports = mongoose.model('User', UserSchema);

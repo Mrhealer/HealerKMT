@@ -27,8 +27,8 @@
             </div>
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title" title="Tổng bài báo trong nước">
-                        <i class="fa fa-hdd-o"></i> Danh sách khách hàng 
+                    <h3 class="box-title" title="">
+                        <i class="fa fa-hdd-o"></i> Danh sách người dùng
                         <span class="badge bg-light-blue">
                             <span id="lblTotal_User">0</span>
                         </span>
@@ -46,7 +46,12 @@
             <!-- box Thong tin co ban -->
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-info"></i> Thông tin chung</h3>
+                    <h3 class="box-title">
+                        <i class="fa fa-info"></i> <a name="zoneViewUser">Thông tin người dùng</a>
+                    </h3>
+                    <div class="pull-right">
+                        <a class="btn btn-primary poiter" id="btnCallModal"><i class="fa fa-plus"></i> Thêm</a>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div class="col-sm-12">
@@ -87,9 +92,11 @@
                                                         3) Email:
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-4">
+                                                <div class="col-sm-10">
                                                     <span id="lblUser_Email"></span>
                                                 </div>
+                                            </div>
+                                            <div class="row sub-row">
                                                 <div class="col-sm-2">
                                                     <div class="title-name">
                                                         4) Điện thoại:
@@ -98,80 +105,109 @@
                                                 <div class="col-sm-4">
                                                     <span id="lblUser_Phone"></span>
                                                 </div>
+                                                <div class="col-sm-2">
+                                                <div class="title-name">
+                                                    5) Tình trạng:
+                                                </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <span id="lblUser_Status"></span>
+                                                </div>
                                             </div>
-            
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="box-footer" id="zoneAction_User">
+                               
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- box Danh sach thiet bi dieu khien -->
-            <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">
-                            <i class="fa fa-image"></i> Hoạt cảnh
-                        </h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="col-sm-12">
-                            <div id="zoneAction"></div>
-                        </div>
-                    </div>
-                </div>
-            <!-- box Danh sach thiet bi dieu khien -->
-            <div class="box box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">
-                        <i class="fa fa-sun-o"></i> Thiết bị điều khiển 
-                        <span class="badge bg-light-blue">
-                            <span id="lblTotal_User_Device">0</span>
-                        </span>
-                    </h3>
-                </div>
-                <div class="box-body">
-                    <div class="col-sm-12">
-                        <table id="tblUser_Device" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="td-center">Stt</th>
-                                    <th class="td-center">Hình ảnh</th>
-                                    <th class="td-left">Tên thiết bị</th>
-                                    <th class="td-right">Tình trạng</th>
-                                    <th class="td-center">Chuyển công tắc</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!--
-                                <tr>
-                                    <td class="td-center">1</td>
-                                    <td class="td-left">Bóng đèn phòng khách</td>
-                                    <td class="td-right"> <small class="label label-danger">Off</small></td>
-                                    <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-off"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="td-center">2</td>
-                                    <td class="td-left">Điều hòa</td>
-                                    <td class="td-right"><small class="label label-success">On</small></td>
-                                    <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-on"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="td-center">3</td>
-                                    <td class="td-left">Nồi cơm điện</td>
-                                    <td class="td-right"><small class="label label-success">On</small></td>
-                                    <td class="td-center"><a class="btn btn-default btn-circle color-active"><i class="fa fa-toggle-on"></i></a></td>
-                                </tr>
-                                -->
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<div class="modal fade" id="myModal_User" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span class="lang" key="">--</span></h4>
+                </div>
+                <div class="modal-body" style="">
+                    <!--row 1-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Họ tên</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Name" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 2-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Email</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Email" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 3-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Tài khoản</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Username" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 4-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Mật khẩu</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Password" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 5-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Điện thoại</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Phone" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 6-->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label style="font-weight: normal"><span class="lang" key="">Địa chỉ</span></label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtUser_Address" class="form-control" />
+                        </div>
+                    </div>
+                    <!--row 7-->
+                    <div class="row">
+                            <div class="col-sm-3">
+                                <label style="font-weight: normal"><span class="lang" key="">Hình ảnh</span></label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" id="txtUser_Avatar" class="form-control" />
+                            </div>
+                        </div>
+                </div>
+                <div id="notify"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle"></i><span class="lang" key=""> Đóng</span></button>
+                    <a class="submit btn btn-primary" id="btnSave_User"><i class="fa fa-save"></i><span class="lang" key=""> Lưu</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- page script -->
 <script src="./js/process/user.js?v=1.0.0.0"></script>
 <script type="text/javascript">

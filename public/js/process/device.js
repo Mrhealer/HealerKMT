@@ -116,23 +116,16 @@ Device.prototype = {
                 if (core.util.checkValue(data.message)) {
                     obj_notify = {
                         type: "w",
-                        content: data.message,
+                        content: JSON.stringify(data.message),
                     }
                     core.system.alertOnModal(obj_notify);
                     return;
                 }
                 if (data.success) {
-                    if (core.util.checkValue(data.Id)) {
+                    if (core.util.checkValue(data.id)) {
                         obj_notify = {
                             type: "s",
                             content: "Thêm mới thành công!",
-                        }
-                        core.system.alertOnModal(obj_notify);
-                    }
-                    else {
-                        obj_notify = {
-                            type: "i",
-                            content: "Cập nhật thành công!",
                         }
                         core.system.alertOnModal(obj_notify);
                     }
@@ -141,7 +134,7 @@ Device.prototype = {
                 else {
                     obj_notify = {
                         type: "w",
-                        content: obj_save.action + " (er): " + data.Message,
+                        content: obj_save.action + ": " + JSON.stringify(data.message),
                     }
                     core.system.alertOnModal(obj_notify);
                 }
@@ -151,7 +144,7 @@ Device.prototype = {
                 core.system.endLoading();
                 obj_notify = {
                     type: "s",
-                    content: obj_save.action + " (er): " + er,
+                    content: obj_save.action + " (er): " + JSON.stringify(er),
                 }
                 core.system.alertOnModal(obj_notify);
             },

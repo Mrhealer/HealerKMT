@@ -5,12 +5,16 @@ router.get("/", function(req, res){
     res.render('index.ejs');
 });
 
+router.get("/user", function(req, res){
+    res.render('./modules/user.ejs');
+});
+
 router.get("/device", function(req, res){
     res.render('./modules/device.ejs');
 });
 
-router.get("/user", function(req, res){
-    res.render('./modules/user.ejs');
+router.get("/user_device", function(req, res){
+    res.render('./modules/user_device.ejs');
 });
 
 router.get("/cat_device", function(req, res){
