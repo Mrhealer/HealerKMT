@@ -3,6 +3,7 @@ package com.kaity.dev.smarthome.Utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -30,6 +31,7 @@ public class CommonUtils {
     private static final String TAG = CommonUtils.class.getSimpleName();
     private static final String LANGUAGE_TABLE_NAME = "language";
     private static final String LANGUAGE_CULUMNNNAME = "value";
+    public static final String mPreference = "mPreferenceUserID";
 
     /**
      * get status of Network

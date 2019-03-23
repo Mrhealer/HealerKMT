@@ -1,9 +1,12 @@
 package com.kaity.dev.smarthome.Splash;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -11,8 +14,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.kaity.dev.smarthome.DashBoard.HomeActivity;
 import com.kaity.dev.smarthome.LoginActivity;
 import com.kaity.dev.smarthome.R;
+import com.kaity.dev.smarthome.Utils.Constants;
 import com.kaity.dev.smarthome.Utils.Logger;
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,6 +26,7 @@ public class SplashActivity extends AppCompatActivity {
     private static final int WAITED_INDEX = 3500;
     private static final int DEFAULT_SLEEP = 100;
     private Thread mSplashThread;
+    private SharedPreferences mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class SplashActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_layout);
         Logger.i(TAG, "onCreate", "");
+        mSharedPref = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
         startAnimation();
     }
 
@@ -57,7 +64,12 @@ public class SplashActivity extends AppCompatActivity {
                         waited += DEFAULT_SLEEP;
                     }
                     imageView.clearAnimation();
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent intent = new Intent();
+                    if (TextUtils.isEmpty(mSharedPref.getString(Constants.USER_ID_INDEX_KEY, Constants.EMPTY_STRING))) {
+                        intent.setClass(SplashActivity.this, LoginActivity.class);
+                    } else {
+                        intent.setClass(SplashActivity.this, HomeActivity.class);
+                    }
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     SplashActivity.this.finish();

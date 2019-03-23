@@ -1,7 +1,9 @@
 package com.kaity.dev.smarthome.DashBoard;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +36,7 @@ import com.kaity.dev.smarthome.Device.Apdater.DeviceRightAdapter;
 import com.kaity.dev.smarthome.Device.Apdater.StageAdapter;
 import com.kaity.dev.smarthome.Device.Model.DeviceModel;
 import com.kaity.dev.smarthome.Device.Model.StageModel;
+import com.kaity.dev.smarthome.LoginActivity;
 import com.kaity.dev.smarthome.R;
 import com.kaity.dev.smarthome.SmartHomeCallBack;
 import com.kaity.dev.smarthome.UpdateHomeActivity;
@@ -51,6 +55,7 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity implements StageAdapter.onClickStage,
         StageAdapter.onLongItemClickStage, DeviceAdapter.onClickListenerDevice, SmartHomeCallBack {
 
+    private static String mUserIdIndex = Constants.EMPTY_STRING;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -66,11 +71,13 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
     private ArrayList<DeviceModel> mArrayListRightDevice;
     private int mCountDeviceSize, mCountStageSize;
     private BottomSheetBehavior mBottomSheetBehavior;
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_layout);
+        getUserId();
         mCountDeviceSize = 0;
         mCountStageSize = 0;
         mArrayList = new ArrayList<>();
@@ -84,6 +91,20 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         initDataStage();
         initDataDevice();
         initListeners();
+    }
+
+    /**
+     * get User ID for Home Screen
+     */
+    private void getUserId() {
+        mSharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
+        mUserIdIndex = mSharedPreferences.getString(Constants.USER_ID_INDEX_KEY, Constants.EMPTY_STRING);
+        if (TextUtils.isEmpty(mUserIdIndex)) {
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void init() {
@@ -117,14 +138,13 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
         mRecyclerViewDevice.setItemAnimator(new DefaultItemAnimator());
         mRecyclerViewDevice.setHasFixedSize(true);
-        mRecyclerViewDevice.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerViewDevice.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerViewDevice.setAdapter(adapter);
     }
 
     private ArrayList<StageModel> getAllActionArrayList() {
         final ArrayList<StageModel> arrayList = new ArrayList<>();
-        StringRequest stringRequest = new StringRequest(Constants.ACTION_USER_URL, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Constants.ACTION_USER_URL + mUserIdIndex, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -152,7 +172,7 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
     private ArrayList<DeviceModel> getAllDeviceArrayList() {
         final ArrayList<DeviceModel> arrayList = new ArrayList<>();
-        StringRequest stringRequest = new StringRequest(Constants.URL_API_DEVICE, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Constants.URL_API_DEVICE + mUserIdIndex, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -219,6 +239,9 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
     }
 
+    /**
+     * listener callback from handle bottom sheet
+     */
     private void initListeners() {
         mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -359,7 +382,6 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         adapter.notifyDataSetChanged();
         mRecyclerViewDevice.setItemAnimator(new DefaultItemAnimator());
         mRecyclerViewDevice.setHasFixedSize(true);
-        mRecyclerViewDevice.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mRecyclerViewDevice.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerViewDevice.setAdapter(adapter);
     }

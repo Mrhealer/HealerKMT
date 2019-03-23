@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.hardware.fingerprint.FingerprintManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -20,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kaity.dev.smarthome.DashBoard.HomeActivity;
 import com.kaity.dev.smarthome.Database.DatabaseHelper;
 import com.kaity.dev.smarthome.Utils.Logger;
 import com.kaity.dev.smarthome.VolleyLib.LoginHelper;
@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView mTextChooseLanguage;
     private DatabaseHelper mDatabaseHelper;
     private EditText mEdtUserName, mEdtPassword;
-//    private FingerPrintAuthHelper mFingerPrintAuthHelper;
     private LoginHelper.onLoginCallBack mOnLoginCallBack;
 
     @Override
@@ -43,19 +42,16 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login_layout);
         init();
-//        mFingerPrintAuthHelper = FingerPrintAuthHelper.getHelper(this, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        mFingerPrintAuthHelper.startAuth();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        mFingerPrintAuthHelper.stopAuth();
     }
 
     private void init() {
@@ -68,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onLoginSuccess() {
                 Logger.i(TAG, "init", "onLoginSuccess");
-                Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -95,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void displayDialogLanguage() {
-        Logger.i(TAG, "displayDialogLanguage","");
+        Logger.i(TAG, "displayDialogLanguage", "");
         final String[] items = {getString(R.string.language_english), getString(R.string.language_vietnam)};
         Dialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -156,33 +152,4 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
-//    @Override
-//    public void onNoFingerPrintHardwareFound() {
-//        Logger.e(TAG, "onNoFingerPrintHardwareFound", "no Hardware");
-//    }
-//
-//    @Override
-//    public void onNoFingerPrintRegistered() {
-//        Toast.makeText(this, getString(R.string.finger_print_register), Toast.LENGTH_LONG).show();
-//        Logger.e(TAG, "onNoFingerPrintHardwareFound", "no Hardware");
-//    }
-//
-//    @Override
-//    public void onBelowMarshmallow() {
-//
-//    }
-//
-//    @Override
-//    public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
-//        Intent intent = new Intent(this, DashBoardActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        startActivity(intent);
-//    }
-//
-//    @Override
-//    public void onAuthFailed(int i, String s) {
-//        Toast.makeText(this, getString(R.string.finger_print_login_fail), Toast.LENGTH_LONG).show();
-//        Logger.e(TAG, "onAuthFailed", "Login Failv  ");
-//    }
 }

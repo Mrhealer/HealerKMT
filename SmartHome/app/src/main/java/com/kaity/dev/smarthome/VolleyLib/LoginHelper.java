@@ -1,12 +1,14 @@
 package com.kaity.dev.smarthome.VolleyLib;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.kaity.dev.smarthome.Utils.CommonUtils;
 import com.kaity.dev.smarthome.Utils.Constants;
 import com.kaity.dev.smarthome.Utils.Logger;
 
@@ -43,6 +45,8 @@ public class LoginHelper {
                 Logger.i(TAG, "stringRequest", "success " + response);
                 JSONObject jsonObject = new JSONObject(response);
                 boolean isLoginSuccess = Boolean.parseBoolean(jsonObject.optString("success"));
+                String mId = jsonObject.optString("id");
+                setUserIdPref(mId);
                 Logger.i(TAG, "stringRequest", "success: " + isLoginSuccess);
                 if (isLoginSuccess) {
                     mOnLoginCallBack.onLoginSuccess();
@@ -68,5 +72,12 @@ public class LoginHelper {
             return params;
         }
     };
+
+    private void setUserIdPref(String id) {
+        SharedPreferences preferences = mContext.getApplicationContext().getSharedPreferences(Constants.SHARED_PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Constants.USER_ID_INDEX_KEY, id);
+        editor.commit();
+    }
 
 }

@@ -6,8 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kaity.dev.smarthome.Device.Model.DeviceModel;
 import com.kaity.dev.smarthome.R;
@@ -19,7 +22,7 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
     private Context mContext;
     private DeviceAdapter.onClickListenerDevice mOnClickListener;
 
-    public DeviceRightAdapter(Context context,ArrayList<DeviceModel> mArrayList, DeviceAdapter.onClickListenerDevice onClickListener) {
+    public DeviceRightAdapter(Context context, ArrayList<DeviceModel> mArrayList, DeviceAdapter.onClickListenerDevice onClickListener) {
         this.mContext = context;
         this.mArrayList = mArrayList;
         this.mOnClickListener = onClickListener;
@@ -48,6 +51,7 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
 
         private TextView tv;
         private ImageView imageView;
+        private Switch aSwitch;
         private DeviceModel deviceModel;
 
         public MyHolderView(@NonNull View itemView) {
@@ -55,6 +59,13 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
             itemView.setOnClickListener(this);
             tv = (TextView) itemView.findViewById(R.id.title_right);
             imageView = (ImageView) itemView.findViewById(R.id.img_device_right);
+            aSwitch = itemView.findViewById(R.id.switcher_right);
+            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Toast.makeText(mContext, "Turn Of On/OFF", Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
         public void setData(DeviceModel deviceModel) {
@@ -68,7 +79,12 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
 
         @Override
         public void onClick(View v) {
-            mOnClickListener.onClickDevice(getAdapterPosition(), v);
+            switch (v.getId()) {
+                case R.id.switcher_right:
+                    Toast.makeText(mContext, "Turn Of On/OFF", Toast.LENGTH_LONG).show();
+                    break;
+            }
+//            mOnClickListener.onClickDevice(getAdapterPosition(), v);
         }
     }
 }
