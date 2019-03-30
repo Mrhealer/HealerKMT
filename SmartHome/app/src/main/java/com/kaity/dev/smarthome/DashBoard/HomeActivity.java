@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -38,6 +39,7 @@ import com.kaity.dev.smarthome.Device.Model.DeviceModel;
 import com.kaity.dev.smarthome.Device.Model.StageModel;
 import com.kaity.dev.smarthome.LoginActivity;
 import com.kaity.dev.smarthome.R;
+import com.kaity.dev.smarthome.SmartHomeApplication;
 import com.kaity.dev.smarthome.SmartHomeCallBack;
 import com.kaity.dev.smarthome.UpdateHomeActivity;
 import com.kaity.dev.smarthome.Utils.Constants;
@@ -51,9 +53,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+
 
 public class HomeActivity extends AppCompatActivity implements StageAdapter.onClickStage,
-        StageAdapter.onLongItemClickStage, DeviceAdapter.onClickListenerDevice, SmartHomeCallBack {
+        StageAdapter.onLongItemClickStage, DeviceAdapter.onClickListenerDevice, SmartHomeCallBack, DeviceRightAdapter.onClickSwitcher {
 
     private static String mUserIdIndex = Constants.EMPTY_STRING;
     private Toolbar mToolbar;
@@ -72,6 +77,7 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
     private int mCountDeviceSize, mCountStageSize;
     private BottomSheetBehavior mBottomSheetBehavior;
     private SharedPreferences mSharedPreferences;
+    private Socket mSocket;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,7 +97,26 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         initDataStage();
         initDataDevice();
         initListeners();
+        SmartHomeApplication smartHomeApplication = (SmartHomeApplication) getApplication();
+        mSocket = smartHomeApplication.getSocket();
+
+        mSocket.on(Socket.EVENT_CONNECT,onNewDevice);
+        mSocket.on("device_status", onNewDevice);
+        mSocket.connect();
     }
+
+    private Emitter.Listener onNewDevice = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+           runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Logger.i(this,"AAA","" + data);
+                }
+            });
+        }
+    };
 
     /**
      * get User ID for Home Screen
@@ -239,6 +264,13 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
 
     }
 
+    @Override
+    protected void onResume() {
+        String json = "{'_id':'5c838db6c379c92ac0978a85','content':'00000000'}";
+        mSocket.emit("device_onoff", json);
+        super.onResume();
+    }
+
     /**
      * listener callback from handle bottom sheet
      */
@@ -314,6 +346,13 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         mArrayList.add(new ItemMenu(R.drawable.feedback_left, getString(R.string.feedback_left)));
         mArrayList.add(new ItemMenu(R.drawable.help_left, getString(R.string.help_left)));
         mArrayList.add(new ItemMenu(R.drawable.demo_left, getString(R.string.demo_left)));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSocket.disconnect();
+        mSocket.off("device_onoff", onNewDevice);
     }
 
     @Override
@@ -399,5 +438,17 @@ public class HomeActivity extends AppCompatActivity implements StageAdapter.onCl
         mRecyclerViewStage.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
         mRecyclerViewStage.setAdapter(stageAdapter);
     }
+
+    @Override
+    public void onClickSwitcherItem(int position, View view) {
+//        if (!mSocket.connected()) {
+//            return;
+//        }
+        String json = "{'_id':'5c838db6c379c92ac0978a85','content':'00000000'}";
+        mSocket.emit("device_onoff", json);
+        Toast.makeText(this, "AAA", Toast.LENGTH_LONG).show();
+//        mSocket.emit()
+    }
+
 
 }

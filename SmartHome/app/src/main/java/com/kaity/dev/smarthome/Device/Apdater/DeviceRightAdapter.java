@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.MyHolderView> {
     private ArrayList<DeviceModel> mArrayList;
     private Context mContext;
-    private DeviceAdapter.onClickListenerDevice mOnClickListener;
+    private onClickSwitcher mOnClickListener;
 
-    public DeviceRightAdapter(Context context, ArrayList<DeviceModel> mArrayList, DeviceAdapter.onClickListenerDevice onClickListener) {
+    public DeviceRightAdapter(Context context, ArrayList<DeviceModel> mArrayList, onClickSwitcher onClickListener) {
         this.mContext = context;
         this.mArrayList = mArrayList;
         this.mOnClickListener = onClickListener;
@@ -63,7 +63,7 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
             aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Toast.makeText(mContext, "Turn Of On/OFF", Toast.LENGTH_LONG).show();
+                        mOnClickListener.onClickSwitcherItem(getAdapterPosition(),buttonView);
                 }
             });
         }
@@ -86,5 +86,9 @@ public class DeviceRightAdapter extends RecyclerView.Adapter<DeviceRightAdapter.
             }
 //            mOnClickListener.onClickDevice(getAdapterPosition(), v);
         }
+    }
+
+    public interface onClickSwitcher {
+        void onClickSwitcherItem(int position, View view);
     }
 }

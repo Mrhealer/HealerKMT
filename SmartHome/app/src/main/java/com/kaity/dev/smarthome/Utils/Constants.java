@@ -12,4 +12,6 @@ public class Constants {
     public static String SHARED_PREFERENCE_NAME = "SmPref";
     public static final String USER_ID_INDEX_KEY = "UserKey";
     public static final String EMPTY_STRING = "";
+
+    public static final String URL_API_CONTROL_DEVICE = "http://apiss.com.vn:8881/";
 }

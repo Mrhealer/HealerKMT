@@ -37,4 +37,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.0'
 //    implementation(name: 'fingerlib', ext: 'aar')
     implementation files('libs/slider.jar')
+
+    implementation ('io.socket:socket.io-client:0.8.3') {
+        exclude group: 'org.json', module: 'json'
+    }
 }

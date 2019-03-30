@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.kaity.dev.smarthome.CheckWifiActivity;
 import com.kaity.dev.smarthome.DashBoard.HomeActivity;
 import com.kaity.dev.smarthome.Database.DatabaseHelper;
+import com.kaity.dev.smarthome.SmartHomeApplication;
 import com.kaity.dev.smarthome.VolleyLib.VolleySingleton;
 
 import org.json.JSONException;
@@ -26,6 +27,8 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.IOException;
+
+import io.socket.client.Socket;
 
 public class CommonUtils {
     private static final String TAG = CommonUtils.class.getSimpleName();
@@ -109,5 +112,10 @@ public class CommonUtils {
         } else {
             Logger.w(TAG, "setLanguageToDatabase", "Context null");
         }
+    }
+
+    public static void connectSocket(Socket socket){
+
+
     }
 }
