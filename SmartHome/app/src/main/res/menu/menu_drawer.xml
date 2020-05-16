@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_add_device"
+            android:icon="@drawable/ic_add_device"
+            android:title="@string/add_device_left" />
+        <item
+            android:id="@+id/nav_copy"
+            android:icon="@drawable/copy_left"
+            android:title="@string/copy_left" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/share_left"
+            android:title="@string/share_left" />
+        <item
+            android:id="@+id/nav_web_chat"
+            android:icon="@drawable/ic_webchat"
+            android:title="@string/webchat_control_left" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings_left" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/feedback_left"
+            android:title="@string/feedback_left" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="@string/help_left" />
+        <item
+            android:id="@+id/nav_demo"
+            android:icon="@drawable/ic_demo"
+            android:title="@string/demo_left" />
+    </group>
+</menu>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartHome</string>
+    <string name="user_name">User name</string>
+    <string name="pass_word">Password</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="login">Login</string>
+    <string name="remember">Remember Me</string>
+    <string name="quat_pk">Living room fan</string>
+    <string name="quat_bep">Kitchen fan</string>
+    <string name="quat_tang2">Floor 2 fan</string>
+    <string name="den_pk1">Living room lights 1</string>
+    <string name="den_pk2">Living room lights 2</string>
+    <string name="den_pk3">Living room lights 3</string>
+    <string name="den_pk4">Living room lights 14</string>
+    <string name="den_pk5">Living room lights 5</string>
+    <string name="loa">Speaker</string>
+    <string name="binh_nong_lanh">Electric Water Heater</string>
+    <string name="dieu_hoa">Air conditioning</string>
+    <string name="may_say">Dryer</string>
+    <string name="may_giat">Washing machine</string>
+    <string name="ve_nha">Go home</string>
+    <string name="di_lam">Go to work</string>
+    <string name="nau_an">Cooking</string>
+    <string name="di_ngu">Bedtime</string>
+    <string name="thuc_day">Wake up</string>
+    <string name="di_tam">Take a shower</string>
+    <string name="them_hoat_canh">Add Action</string>
+
+    <!-- Language -->
+    <string name="language_choose">Choose Language</string>
+    <string name="language_string">Language : </string>
+    <string name="language_english">English</string>
+    <string name="language_vietnam">VietNam</string>
+</resources>

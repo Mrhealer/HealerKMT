@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Layout_Splash"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash.SplashActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutSplash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="-200dp"
+            android:src="@drawable/cloundly" />
+
+        <ImageView
+            android:id="@+id/img_logo_splash"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-150dp"
+            android:src="@drawable/logo_home" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_TextSplashDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="@string/intro"
+        android:textSize="@dimen/text_account_size" />
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Notifications">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/vibrate"
+            android:key=""
+            android:title="Vibrate on touch" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/notification"
+            android:key="@string/notifications_new_message"
+            android:title="Push message" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/gesturepassword"
+            android:key="@string/notifications_new_message"
+            android:title="Gesture password" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/fahrenheit"
+            android:key="@string/notifications_new_message"
+            android:title="Display Temperature in F" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Settings">
+
+        <!-- preference opens url in browser -->
+        <Preference
+            android:icon="@drawable/background_check"
+            android:title="Background">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_faq" />
+        </Preference>
+        <!-- preference opens url in browser -->
+        <Preference
+            android:icon="@drawable/accountmanager"
+            android:title="Account Management">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_faq" />
+        </Preference>
+        <!-- preference opens url in browser -->
+        <ListPreference
+            android:dialogTitle="Status Notification For"
+            android:icon="@drawable/about"
+            android:key="sendNotifica1tionType"
+            android:title="Status Notification For" />
+    </PreferenceCategory>
+    <PreferenceScreen
+        android:layout="@layout/button_preference"
+        android:summary="This is my setting."
+        android:title="My Setting"></PreferenceScreen>
+</PreferenceScreen>

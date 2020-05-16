@@ -1,0 +1,10 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <item name="ic_add_device" type="drawable">@drawable/add_device_left</item>
+    <item name="ic_copy" type="drawable">@drawable/copy_left</item>
+    <item name="ic_share" type="drawable">@drawable/share_left</item>
+    <item name="ic_webchat" type="drawable">@drawable/webchat_left</item>
+    <item name="ic_settings" type="drawable">@drawable/settings_left</item>
+    <item name="ic_feedback" type="drawable">@drawable/feedback_left</item>\
+    <item name="ic_help" type="drawable">@drawable/help_left</item>
+    <item name="ic_demo" type="drawable">@drawable/demo_left</item>
+</resources>
